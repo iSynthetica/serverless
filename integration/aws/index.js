@@ -5,7 +5,7 @@ module.exports.process = async event => {
     let payload = JSON.parse(event.body);
 
     const controller = require(`/opt/nodejs/${step}`);
-    let result = await controller.action(payload);
+    let result = await controller.process(payload);
 
     return {
         statusCode: 200,
