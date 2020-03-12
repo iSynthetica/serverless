@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports.process = async event => {
-    let step = event.pathParameters;
+    let step = event.pathParameters.step;
     let payload = JSON.parse(event.body);
 
     const controller = require(`/opt/nodejs/${step}`);
