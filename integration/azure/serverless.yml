@@ -1,0 +1,23 @@
+service: milkbox-funnels-backend-azure
+
+provider:
+  name: azure
+  location: West US
+
+plugins:
+  - serverless-azure-functions
+
+package:
+  exclude:
+    - node_modules/**
+    - .gitignore
+    - package.json
+    - .git/**
+
+functions:
+  processAllFunction:
+     handler: process
+     events:
+       - http: true
+         x-azure-settings:
+           authLevel: anonymous

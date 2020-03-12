@@ -1,0 +1,23 @@
+/*
+
+!.gitignore
+!README.md
+!.travis.yml
+!package.json
+
+!controllers/
+!controllers/**
+
+controllers/package-lock.json
+controllers/node_modules
+
+!integration/
+!integration/**
+
+# AWS
+integration/*/.serverless
+integration/*/node_modules
+integration/*/package-lock.json
+integration/*/dependencies/nodejs/*
+
+!integration/*/dependencies/nodejs/.gitkeep

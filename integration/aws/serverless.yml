@@ -1,0 +1,33 @@
+service: milkbox-funnels-backend-aws
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: production
+  profile: milkbox
+
+# you can add packaging information here
+package:
+#  include:
+#    - include-me.js
+#    - include-me-dir/**
+  exclude:
+    - dependencies/**
+
+layers:
+  controllers:
+    path: dependencies
+    description: Shared library layer
+
+functions:
+  processAllFunction:
+    handler: index.process
+    name: ${self:provider.stage}-process
+    description: Function to process steps from funnel
+    events:
+      - http:
+          path: process/{step}
+          method: post
+          cors: true
+    layers:
+      - {Ref: ControllersLambdaLayer}
