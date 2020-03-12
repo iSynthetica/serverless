@@ -1,5 +1,10 @@
 # Milkbox Funnels Backend
 
+## Install Serverless Framework
+```
+npm install -g serverless
+```
+
 ## Copy dependencies
 ```
 cp -a controllers/. integration/aws/dependencies/nodejs/
