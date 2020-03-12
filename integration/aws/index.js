@@ -1,13 +1,15 @@
 'use strict';
 
 module.exports.process = async event => {
-    console.log(event);
+    console.log('test=======================================');
     let step = event.pathParameters.step;
     let payload = JSON.parse(event.body);
-    console.log(event);
+    console.log('test=======================================');
 
     const controller = require(`/opt/nodejs/${step}`);
+    console.log('test=======================================');
     let result = await controller.process(payload);
+    console.log('test=======================================');
 
     return {
         statusCode: 200,
