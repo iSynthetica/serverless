@@ -6,7 +6,8 @@ exports.validateParams = (object, schema, allowUnknown = true) => {
     if (empty(schema)) {
         return object;
     }
-    const result = Joi.validate(object, schema, { allowUnknown: allowUnknown, abortEarly: false });
+    const result = schema.validate(object);
+    // const result = Joi.validate(object, schema, { allowUnknown: allowUnknown, abortEarly: false });
     if (result.error !== null) {
         let error_messages = [];
 
