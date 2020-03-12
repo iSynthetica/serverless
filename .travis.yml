@@ -5,4 +5,15 @@ node_js:
 
 before_script:
   - 'npm install -g serverless'
+  - 'npm install'
+  - 'cd controllers && npm install && cd ..'
   - 'rsync -r controllers/ integration/aws/dependencies/nodejs'
+
+jobs:
+  include:
+    - stage: deploy
+      name: Deploy Milkbox Funnels Backend to Staging
+      env: environment=staging
+      script:
+        - cd integration/aws
+        - serverless deploy
