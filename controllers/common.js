@@ -1,4 +1,5 @@
 const Joi = require('@hapi/joi');
+const empty = require('is-empty')
 
 // Will validate an object against a JOI schema
 exports.validateParams = (object, schema, allowUnknown = true) => {
