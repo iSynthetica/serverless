@@ -25,6 +25,6 @@ package:
 
 functions:
   first:
-    handler: process
+    handler: index.process
     events:
       - http: path
