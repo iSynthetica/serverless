@@ -3,7 +3,7 @@ service: milkbox-funnels-backend-azure
 provider:
   name: azure
   runtime: nodejs10.x
-  location: West US
+  location: East US
 
 plugins:
   - serverless-azure-functions
