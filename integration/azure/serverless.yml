@@ -2,6 +2,7 @@ service: milkbox-funnels-backend-azure
 
 provider:
   name: azure
+  runtime: nodejs10.x
   location: West US
 
 plugins:
@@ -16,7 +17,7 @@ package:
 
 functions:
   processAllFunction:
-     handler: process
+     handler: index.process
      events:
        - http: true
          x-azure-settings:
