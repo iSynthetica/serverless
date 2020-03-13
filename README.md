@@ -1,5 +1,9 @@
 # Milkbox Funnels Backend
 
+## Settings for Travis
+
+- 
+
 ## Install Serverless Framework
 ```
 npm install -g serverless
@@ -22,6 +26,31 @@ serverless deploy
 
 ## Install Azure
 ```
+curl -L https://aka.ms/InstallAzureCli | bash
+az --version
+az login
+```
+You will get something like this
+```
+[
+  {
+    "cloudName": ""<cloudName>"",
+    "id": "<subscription-id>",
+    "homeTenantId": "<homeTenantId>",
+    "isDefault": true,
+    "managedByTenants": [],
+    "name": "<name>",
+    "state": "<state>",
+    "tenantId": "<tenantId>",
+    "user": {
+      "name": "<name>",
+      "type": "<user>"
+    }
+  }
+]
+```
+```
+az account set -s <subscription-id>
 cd integration/azure
 npm install
 ```
