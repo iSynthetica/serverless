@@ -19,6 +19,7 @@ jobs:
       script:
         - cd integration/aws
         - serverless deploy
-        - cd ..
+        - cd ../..
         - cd integration/azure
         - serverless deploy
+        - cd ../..
