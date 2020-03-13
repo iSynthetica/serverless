@@ -8,6 +8,8 @@ before_script:
   - 'npm install'
   - 'cd controllers && npm install && cd ..'
   - 'rsync -r controllers/ integration/aws/dependencies/nodejs'
+  - 'rsync -r controllers/ integration/azure/controllers'
+  - 'rsync -r controllers/ integration/google/controllers'
 
 jobs:
   include:
@@ -16,4 +18,7 @@ jobs:
       env: environment=staging
       script:
         - cd integration/aws
+        - serverless deploy
+        - cd ..
+        - cd integration/azure
         - serverless deploy

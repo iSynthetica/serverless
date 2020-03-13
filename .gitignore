@@ -19,5 +19,7 @@ integration/*/.serverless
 integration/*/node_modules
 integration/*/package-lock.json
 integration/*/dependencies/nodejs/*
+integration/*/controllers/*
 
 !integration/*/dependencies/nodejs/.gitkeep
+!integration/*/controllers/.gitkeep
