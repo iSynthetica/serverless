@@ -26,8 +26,8 @@ jobs:
       env: environment=staging
       script:
         - cd integration/aws
-        - serverless deploy
+        - serverless deploy -v
         - cd ../..
         - cd integration/azure
-        - serverless deploy
+        - serverless deploy -v
         - cd ../..
