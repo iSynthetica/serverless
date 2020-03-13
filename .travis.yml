@@ -7,6 +7,8 @@ before_script:
   - 'npm install -g serverless'
   - 'npm install'
   - 'cd controllers && npm install && cd ..'
+  - 'cd integration/azure && npm install && cd ../..'
+  - 'cd integration/google && npm install && cd ../..'
   - 'rsync -r controllers/ integration/aws/dependencies/nodejs'
   - 'rsync -r controllers/ integration/azure/controllers'
   - 'rsync -r controllers/ integration/google/controllers'

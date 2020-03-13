@@ -5,16 +5,13 @@
 npm install -g serverless
 ```
 
+## Install 
+
 ## Copy dependencies
 ```
-cp -a controllers/. integration/aws/dependencies/nodejs/
-cp -a controllers/. integration/azure/dependencies/nodejs/
-cp -a controllers/. integration/google/dependencies/nodejs/
-
-
 rsync -r controllers/ integration/aws/dependencies/nodejs
-rsync -r controllers/ integration/azure/dependencies/nodejs
-rsync -r controllers/ integration/google/dependencies/nodejs
+rsync -r controllers/ integration/azure/controllers
+rsync -r controllers/ integration/google/controllers
 ```
 
 ## Deploy AWS
