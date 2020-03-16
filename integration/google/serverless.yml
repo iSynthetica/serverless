@@ -10,7 +10,7 @@ provider:
   # https://serverless.com/framework/docs/providers/google/guide/credentials/
   #
   # the path to the credentials file needs to be absolute
-  credentials: ~/.gcloud/keyfile.json
+  credentials: ~/.gcloud/mb-funnels-be-cdfa3afc24f7.json
 
 plugins:
   - serverless-google-cloudfunctions
@@ -25,6 +25,6 @@ package:
 
 functions:
   first:
-    handler: index.process
+    handler: process
     events:
       - http: path
