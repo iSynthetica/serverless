@@ -28,9 +28,9 @@ jobs:
         - cd integration/aws
         - serverless deploy -v
         - cd ../..
-        - cd integration/google
-        - serverless deploy -v
-        - cd ../..
         - cd integration/azure
+        - serverless deploy --stage production -v
+        - cd ../..
+        - cd integration/google
         - serverless deploy -v
         - cd ../..
