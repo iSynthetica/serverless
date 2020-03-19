@@ -19,6 +19,7 @@ before_script:
   - 'sed -i "s|#google_private_key_id#|${google_private_key_id}|" "credentials.json"'
   - 'sed -i "s|#google_private_key#|${google_private_key}|" "credentials.json"'
   - 'sed -i "s|#google_client_id#|${google_client_id}|" "credentials.json"'
+  - 'mkdir ~/.gcloud'
   - 'mv credentials.json ~/.gcloud/credentials.json'
   - 'cd ../..'
   - 'rsync -r controllers/ integration/aws/dependencies/nodejs'
