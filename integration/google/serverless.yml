@@ -23,9 +23,10 @@ package:
     - .gitignore
     - .git/**
     - credentials.json
+    - credentials-sample.json
 
 functions:
-  first:
+  processAllFunction:
     handler: process
     events:
       - http: path

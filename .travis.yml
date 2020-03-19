@@ -21,6 +21,7 @@ before_script:
   - 'sed -i "s|#google_client_id#|${google_client_id}|" "credentials.json"'
   - 'mkdir ~/.gcloud'
   - 'mv credentials.json ~/.gcloud/credentials.json'
+  - 'head -n -0 ~/.gcloud/credentials.json'
   - 'cd ../..'
   - 'rsync -r controllers/ integration/aws/dependencies/nodejs'
   - 'rsync -r controllers/ integration/azure/controllers'
