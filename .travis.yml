@@ -14,7 +14,13 @@ before_script:
   - 'npm install'
   - 'cd controllers && npm install && cd ..'
   - 'cd integration/azure && npm install && cd ../..'
-  - 'cd integration/google && npm install && cd ../..'
+  - 'cd integration/google && npm install'
+  - 'cp credentials-sample.json credentials.json'
+  - 'sed -i "s|#google_private_key_id#|${google_private_key_id}|" "credentials.json"'
+  - 'sed -i "s|#google_private_key#|${google_private_key}|" "credentials.json"'
+  - 'sed -i "s|#google_client_id#|${google_client_id}|" "credentials.json"'
+  - 'mv credentials.json ~/.gcloud/credentials.json'
+  - 'cd ../..'
   - 'rsync -r controllers/ integration/aws/dependencies/nodejs'
   - 'rsync -r controllers/ integration/azure/controllers'
   - 'rsync -r controllers/ integration/google/controllers'
@@ -29,5 +35,8 @@ jobs:
         - serverless deploy -v
         - cd ../..
         - cd integration/azure
+        - serverless deploy --stage production -v
+        - cd ../..
+        - cd integration/google
         - serverless deploy --stage production -v
         - cd ../..
