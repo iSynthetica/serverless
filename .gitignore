@@ -21,7 +21,8 @@ integration/*/package-lock.json
 integration/*/credentials.json
 integration/*/dependencies/nodejs/*
 integration/*/controllers/*
-/integration/*/subscriptions-info.txt
+integration/*/subscriptions-info.txt
+integration/*/accessKeys.csv
 
 !integration/*/dependencies/nodejs/.gitkeep
 !integration/*/controllers/.gitkeep
