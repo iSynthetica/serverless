@@ -1,9 +1,8 @@
-service: milkbox-funnels-backend-aws
+service: easyfunnel-backend
 
 provider:
   name: aws
   runtime: nodejs10.x
-  stage: production
 
 # you can add packaging information here
 package:

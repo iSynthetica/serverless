@@ -1,4 +1,4 @@
-service: milkbox-funnels-backend-azure
+service: easyfunnel-backend
 
 provider:
   name: azure

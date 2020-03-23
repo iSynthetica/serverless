@@ -25,6 +25,17 @@ rsync -r controllers/ integration/google/controllers
 - Go to Users menu
 - Select User fom the list
 - Click Create access key
+- Download CSV file with credentials
+
+#### 2. Open CSV file. You will have content something like this
+```csv
+Access key ID,Secret access key
+<access_key_ID>,<secret_access_key>
+```
+#### 3. Set Travis environment variables:
+    1. AWS_ACCESS_KEY_ID_MB_FBE = <access_key_ID> (required)
+    2. AWS_SECRET_ACCESS_KEY_MB_FBE = <secret_access_key> (required)
+    3. AWS_DEFAULT_REGION_MB_FBE = <us-east-1> (optional)
 
 ```
 cd integration/aws
@@ -81,7 +92,7 @@ $ az ad sp create-for-rbac
 }
 ```
 ### 6. Add secret environment variables on travis:
-    1. AZURE_CLIENT_ID = <subscription-id>
+    1. AZURE_SUBSCRIPTION_ID = <subscription-id>
     2. AZURE_TENANT_ID = <tenant>
     3. AZURE_CLIENT_ID = <name>
     4. AZURE_CLIENT_SECRET = <password>
