@@ -1,15 +1,11 @@
-service: milkbox-funnels-backend-
+service: mb-funnels-be-api
 
 provider:
   name: google
   stage: dev
   runtime: nodejs8
   region: us-central1
-  project: my-project
-  # The GCF credentials can be a little tricky to set up. Luckily we've documented this for you here:
-  # https://serverless.com/framework/docs/providers/google/guide/credentials/
-  #
-  # the path to the credentials file needs to be absolute
+  project: mb-funnels-be-api
   credentials: ~/.gcloud/credentials.json
 
 plugins:
@@ -26,7 +22,7 @@ package:
     - credentials-sample.json
 
 functions:
-  processAllFunction:
-    handler: process
+  first:
+    handler: http
     events:
       - http: path

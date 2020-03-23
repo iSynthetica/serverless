@@ -19,6 +19,13 @@ rsync -r controllers/ integration/google/controllers
 ```
 
 ## Deploy AWS
+#### 1. Get AWS credentials
+- Go to AWS console
+- Go to IAM page
+- Go to Users menu
+- Select User fom the list
+- Click Create access key
+
 ```
 cd integration/aws
 serverless deploy
@@ -27,7 +34,7 @@ serverless deploy
 ## Install Azure
 To deploy Azure functions we need to get Azure credentials
 
-1. Install Azure locally
+#### 1. Install Azure locally
 ```
 $ sudo apt-get update && sudo apt-get install ca-certificates curl apt-transport-https lsb-release gnupg
 $ curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc.gpg > /dev/null
@@ -35,12 +42,12 @@ $ AZ_REPO=$(lsb_release -cs) && echo "deb [arch=amd64] https://packages.microsof
 $ sudo apt-get update && sudo apt-get install azure-cli
 $ az --version
 ```
-2. Login with browser
+#### 2. Login with browser
 ```
 $ az login
 ```
-3. Close browser window. In terminal you will get something like this:
-```
+#### 3. Close browser window. In terminal you will get something like this:
+```json
 [
   {
     "cloudName": "<cloudName>",
@@ -58,11 +65,26 @@ $ az login
   }
 ]
 ```
-4. Set Azure Subscription for which to create Service Principal and generate Service Principal for Azure Subscription
+#### 4. Set Azure Subscription for which to create Service Principal and generate Service Principal for Azure Subscription
 ```
 $ az account set -s <subscription-id>
 $ az ad sp create-for-rbac
 ```
+#### 5. You will get something like this
+```json
+{
+  "appId": "<appId>",
+  "displayName": "<displayName>",
+  "name": "<name>",
+  "password": "<password>",
+  "tenant": "<tenant>"
+}
+```
+### 6. Add secret environment variables on travis:
+    1. AZURE_CLIENT_ID = <subscription-id>
+    2. AZURE_TENANT_ID = <tenant>
+    3. AZURE_CLIENT_ID = <name>
+    4. AZURE_CLIENT_SECRET = <password>
 
 ```
 az account set -s <subscription-id>
@@ -73,6 +95,8 @@ npm install
 ## Install Google
 - Go to Google console
 - There is a dropdown near the top left of the screen (near the search bar that lists your projects). Click it and select "Create Project".
+    1. Set Project name to MB Funnels BE API
+    2. Set project ID to mb-funnels-be-api
 - Go to the API dashboard, select your project and enable the following APIs (if not already enabled):
     1. Google Cloud Functions
     2. Google Cloud Deployment Manager
