@@ -3,8 +3,8 @@
 module.exports.process = async function(context, req) {
 
   let result = {
-    "message": "Hello from Azure M1 API",
-    "request": event
+    "message": "Hello from Easyfunnel API",
+    "request": context
   }
 
   context.res = {

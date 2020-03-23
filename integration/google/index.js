@@ -1,9 +1,11 @@
 'use strict';
 
-exports.http = (request, response) => {
-  response.status(200).send('Hello World!');
-};
+exports.process = (request, response) => {
 
-exports.event = (event, callback) => {
-  callback();
+  let result = {
+    "message": "Hello from Easyfunnel API",
+    "request": request
+  }
+
+  response.status(200).send(JSON.stringify(result));
 };

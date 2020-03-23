@@ -1,11 +1,10 @@
-service: mb-funnels-be-api
+service: easyfunnel-backend
 
 provider:
   name: google
-  stage: dev
-  runtime: nodejs8
-  region: us-central1
-  project: mb-funnels-be-api
+  runtime: nodejs10
+  region: us-east1
+  project: easyfunnel-backend
   credentials: ~/.gcloud/credentials.json
 
 plugins:
@@ -22,7 +21,7 @@ package:
     - credentials-sample.json
 
 functions:
-  first:
-    handler: http
+  processAllFunction:
+    handler: process
     events:
       - http: path
