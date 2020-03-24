@@ -126,16 +126,33 @@ npm install
     12. Save the keyfile somewhere secure. We recommend making a folder in your root folder and putting it there. Like this, ~/.gcloud/keyfile.json. You can change the file name from keyfile to anything. Remember the path you saved it to.
 - Encrypt credential file (Ubuntu)
     1. Install Travis
-    ```shell script
-    sudo apt update
-    sudo apt install snapd
-    sudo snap install travis
-    ```
+        ```shell script
+        sudo gem install travis
+        ```
     2. Login to Travis
-    ```shell script
-    travis login --com
-    ```
-```
-cd integration/google
-npm install
-```
+        ```shell script
+        travis login --com
+        ```
+    3. Input Github credentials
+    4. Encrypt files for staging
+        ```shell script
+        travis encrypt-file integration/google/credentials-staging.json integration/google/credentials-staging.json.enc
+        ```
+    5. Add decription command to before_install: from result, it would be something like this
+        ```shell script
+        openssl aes-256-cbc -K $encrypted_<some_key>_key -iv $encrypted_<some_key>_iv -in integration/google/credentials-staging.json.enc -out integration/google/credentials-staging.json -d
+        ```
+        Make sure to add integration/google/credentials-staging.json.enc to the git repository.
+        Make sure not to add integration/google/credentials-staging.json to the git repository.
+        Commit all changes to your .travis.yml.
+    6. Encrypt files for staging
+        ```shell script
+        travis encrypt-file integration/google/credentials-production.json integration/google/credentials-production.json.enc
+        ```
+    7. Add decription command to before_install: from result, it would be something like this
+        ```shell script
+        openssl aes-256-cbc -K $encrypted_<some_key>_key -iv $encrypted_<some_key>_iv -in integration/google/credentials-production.json.enc -out integration/google/credentials-production.json -d
+        ```
+        Make sure to add integration/google/credentials-production.json.enc to the git repository.
+        Make sure not to add integration/google/credentials-production.json to the git repository.
+        Commit all changes to your .travis.yml.
