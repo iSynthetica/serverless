@@ -19,6 +19,7 @@ integration/*/.serverless
 integration/*/node_modules
 integration/*/package-lock.json
 integration/*/credentials.json
+integration/*/credentials-*.json
 integration/*/dependencies/nodejs/*
 integration/*/controllers/*
 integration/*/subscriptions-info.txt

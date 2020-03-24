@@ -20,7 +20,7 @@ layers:
 functions:
   processAllFunction:
     handler: index.process
-    name: ${opt:stage}-process
+    name: ${opt:stage}-easyfunnel-process
     description: Function to process steps from funnel
     events:
       - http:

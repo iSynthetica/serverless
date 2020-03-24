@@ -8,6 +8,10 @@ addons:
       classic: true
       channel: latest/stable
 
+before_install:
+  - openssl aes-256-cbc -K $encrypted_d0584e450b09_key -iv $encrypted_d0584e450b09_iv -in integration/google/credentials-production.json.enc -out integration/google/credentials-production.json -d
+  - openssl aes-256-cbc -K $encrypted_923f5055fec6_key -iv $encrypted_923f5055fec6_iv -in integration/google/credentials-staging.json.enc -out integration/google/credentials-staging.json -d
+
 before_script:
   - 'npm install -g serverless'
   - 'serverless --version'
@@ -24,13 +28,7 @@ before_script:
   - 'cd controllers && npm install && cd ..'
   - 'cd integration/azure && npm install && cd ../..'
   - 'cd integration/google && npm install'
-  - 'cp credentials-sample.json credentials.json'
-  - 'sed -i "s|#google_private_key_id#|${google_private_key_id}|" "credentials.json"'
-  - 'sed -i "s|#google_private_key#|${google_private_key}|" "credentials.json"'
-  - 'sed -i "s|#google_client_id#|${google_client_id}|" "credentials.json"'
   - 'mkdir ~/.gcloud'
-  - 'mv credentials.json ~/.gcloud/credentials.json'
-  - 'head -n -0 ~/.gcloud/credentials.json'
   - 'cd ../..'
   - 'rsync -r controllers/ integration/aws/dependencies/nodejs'
   - 'rsync -r controllers/ integration/azure/controllers'
@@ -49,5 +47,6 @@ jobs:
         - serverless deploy --stage staging -v
         - cd ../..
         - cd integration/google
+        - mv credentials-staging.json ~/.gcloud/credentials-staging.json
         - serverless deploy --stage staging -v
         - cd ../..

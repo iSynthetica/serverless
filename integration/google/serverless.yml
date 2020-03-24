@@ -4,8 +4,8 @@ provider:
   name: google
   runtime: nodejs10
   region: us-east1
-  project: easyfunnel-backend
-  credentials: ~/.gcloud/credentials.json
+  project: easyfunnel-backend-${opt:stage}
+  credentials: ~/.gcloud/credentials-${opt:stage}.json
 
 plugins:
   - serverless-google-cloudfunctions
@@ -19,6 +19,10 @@ package:
     - .git/**
     - credentials.json
     - credentials-sample.json
+    - credentials-production.json
+    - credentials-staging.json
+    - package-lock.json
+    - package.json
 
 functions:
   processAllFunction:
