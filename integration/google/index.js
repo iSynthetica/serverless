@@ -1,6 +1,18 @@
 'use strict';
 
-exports.process = (request, response) => {
-  console.log(request);
-  response.status(200).send('Hello World!');
-};
+const {
+  handler
+} = require('./handlers');
+
+const functions = [
+  'process'
+];
+
+// Auto-Generator
+let exportObject = {};
+
+for(let functionName of functions){
+  exportObject[`${functionName}`] = handler(functionName)
+}
+
+module.exports = exportObject;
