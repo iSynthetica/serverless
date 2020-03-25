@@ -8,6 +8,7 @@ addons:
       classic: true
       channel: latest/stable
 
+# We need to generate new keys for GCP
 before_install:
   - openssl aes-256-cbc -K $encrypted_d0584e450b09_key -iv $encrypted_d0584e450b09_iv -in integration/google/credentials-production.json.enc -out integration/google/credentials-production.json -d
   - openssl aes-256-cbc -K $encrypted_923f5055fec6_key -iv $encrypted_923f5055fec6_iv -in integration/google/credentials-staging.json.enc -out integration/google/credentials-staging.json -d
@@ -38,6 +39,7 @@ jobs:
   include:
     - stage: deploy
       name: Deploy Milkbox Funnels Backend to Staging
+      if: type = push AND tag =~ ^staging-deploy-.*$
       env: environment=staging
       script:
         - cd integration/aws
@@ -49,4 +51,19 @@ jobs:
         - cd integration/google
         - mv credentials-staging.json ~/.gcloud/credentials-staging.json
         - serverless deploy --stage staging -v
+        - cd ../..
+    - stage: deploy
+      name: Deploy Milkbox Funnels Backend to Staging
+      if: type = push AND tag =~ ^deploy-.*$
+      env: environment=production
+      script:
+        - cd integration/aws
+        - serverless deploy --stage production -v
+        - cd ../..
+        - cd integration/azure
+        - serverless deploy --stage production -v
+        - cd ../..
+        - cd integration/google
+        - mv credentials-staging.json ~/.gcloud/credentials-production.json
+        - serverless deploy --stage production -v
         - cd ../..
