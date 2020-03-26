@@ -32,6 +32,7 @@ jobs:
       if: type = push AND tag =~ ^staging-deploy-.*$
       env: environment=staging
       script:
+        - npm run build
         - rsync -r controllers/ integration/aws/dependencies/nodejs
         - rsync -r controllers/ integration/azure/controllers
         - rsync -r controllers/ integration/google/controllers
@@ -50,6 +51,7 @@ jobs:
       if: type = push AND tag =~ ^deploy-.*$
       env: environment=production
       script:
+        - npm run build
         - rsync -r controllers/ integration/aws/dependencies/nodejs
         - rsync -r controllers/ integration/azure/controllers
         - rsync -r controllers/ integration/google/controllers
