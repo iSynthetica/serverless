@@ -5,13 +5,7 @@ const {
   handler
 } = require('./handlers');
 
-const functions = [
-  'register',
-  'payment',
-  'membership',
-  'upsell',
-  'change-email',
-];
+const functions = config.functions;
 
 // Auto-Generator
 let exportObject = {};

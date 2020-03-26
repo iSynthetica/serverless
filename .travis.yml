@@ -5,25 +5,20 @@ node_js:
 
 # We need to generate new keys for GCP
 before_install:
-  - openssl aes-256-cbc -K $encrypted_d0584e450b09_key -iv $encrypted_d0584e450b09_iv -in integration/google/credentials-production.json.enc -out integration/google/credentials-production.json -d
-  - openssl aes-256-cbc -K $encrypted_923f5055fec6_key -iv $encrypted_923f5055fec6_iv -in integration/google/credentials-staging.json.enc -out integration/google/credentials-staging.json -d
+  - openssl aes-256-cbc -K $encrypted_eb58c3e7c70a_key -iv $encrypted_eb58c3e7c70a_iv -in integration/google/credentials.json.enc -out integration/google/credentials.json -d
 
 before_script:
-  - 'npm install -g serverless'
-  - 'serverless --version'
-  - 'sudo apt-get update && sudo apt-get install ca-certificates curl apt-transport-https lsb-release gnupg'
-  - 'curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc.gpg > /dev/null'
-  - 'AZ_REPO=$(lsb_release -cs) && echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | sudo tee /etc/apt/sources.list.d/azure-cli.list'
-  - 'sudo apt-get update && sudo apt-get install azure-cli'
-  - 'az --version'
-  - 'export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID_MB_FBE}'
-  - 'export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY_MB_FBE}'
-  - 'export AWS_REGION=${AWS_DEFAULT_REGION_MB_FBE}'
-  - 'npm install'
-  - 'cd controllers && npm install && cd ..'
-  - 'cd integration/azure && npm install && cd ../..'
-  - 'cd integration/google && npm install && cd ../..'
-  - 'mkdir ~/.gcloud'
+  - npm install -g serverless
+  - serverless --version
+  - export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID_MB_FBE}
+  - export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY_MB_FBE}
+  - export AWS_REGION=${AWS_DEFAULT_REGION_MB_FBE}
+  - npm install
+  - cd controllers && npm install && cd ..
+  - cd integration/azure && npm install && cd ../..
+  - cd integration/google && npm install && cd ../..
+  - mkdir ~/.gcloud
+  - mv credentials.json ~/.gcloud/credentials.json
 
 jobs:
   include:
@@ -37,14 +32,13 @@ jobs:
         - rsync -r controllers/ integration/azure/controllers
         - rsync -r controllers/ integration/google/controllers
         - cd integration/aws
-        - serverless deploy --stage staging -v
+        - serverless deploy --stage staging --force -v
         - cd ../..
         - cd integration/azure
-        - serverless deploy --stage staging -v
+        - serverless deploy --stage staging --force -v
         - cd ../..
         - cd integration/google
-        - mv credentials-staging.json ~/.gcloud/credentials-staging.json
-        - serverless deploy --stage staging -v
+        - serverless deploy --stage staging --force -v
         - cd ../..
     - stage: deploy
       name: Deploy Milkbox Funnels Backend to Staging
@@ -62,6 +56,5 @@ jobs:
         - serverless deploy --stage production --force -v
         - cd ../..
         - cd integration/google
-        - mv credentials-staging.json ~/.gcloud/credentials-production.json
         - serverless deploy --stage production --force -v
         - cd ../..

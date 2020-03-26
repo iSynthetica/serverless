@@ -117,13 +117,13 @@ npm install
     3. Click IAM & admin menu on left-sidebar
     4. Then click Service accounts on left-sidebar
     5. Click CREATE SERVICE ACCOUNT button on the top
-    6. Input Service account name: Easyfunnel Backend Staging (Easyfunnel Backend Production) and Service account ID will be generated automatically for you. Change it if you wish to: easyfunnel-backend-staging (easyfunnel-backend-production).
+    6. Input Service account name: MB Funnel BE SA (Easyfunnel Backend Staging (Easyfunnel Backend Production)) and Service account ID will be generated automatically for you. Change it if you wish to: easyfunnel-backend-staging (easyfunnel-backend-production).
     7. Click Create button
     8. Add Deployment Manager Editor, Storage Admin, Logging Admin, Cloud Functions Developer roles and click Continue
     9. Click +CREATE KEY button and select JSON key type and click Create button
     10. You will see a json (AKA keyfile) file downloaded
     11. Click Done button
-    12. Save the keyfile somewhere secure. We recommend making a folder in your root folder and putting it there. Like this, ~/.gcloud/keyfile.json. You can change the file name from keyfile to anything. Remember the path you saved it to.
+    12. Save the keyfile into project integration/google folder. We recommend making a folder in your root folder and putting it there. Like this, ~/.gcloud/keyfile.json. You can change the file name from keyfile to anything. Remember the path you saved it to.
 - Encrypt credential file (Ubuntu)
     1. Install Travis
         ```shell script
@@ -136,23 +136,12 @@ npm install
     3. Input Github credentials
     4. Encrypt files for staging
         ```shell script
-        travis encrypt-file integration/google/credentials-staging.json integration/google/credentials-staging.json.enc
+        travis encrypt-file integration/google/credentials.json integration/google/credentials.json.enc
         ```
     5. Add decription command to before_install: from result, it would be something like this
         ```shell script
-        openssl aes-256-cbc -K $encrypted_<some_key>_key -iv $encrypted_<some_key>_iv -in integration/google/credentials-staging.json.enc -out integration/google/credentials-staging.json -d
+        openssl aes-256-cbc -K $encrypted_<some_key>_key -iv $encrypted_<some_key>_iv -in integration/google/credentials.json.enc -out integration/google/credentials-staging.json -d
         ```
-        Make sure to add integration/google/credentials-staging.json.enc to the git repository.
-        Make sure not to add integration/google/credentials-staging.json to the git repository.
-        Commit all changes to your .travis.yml.
-    6. Encrypt files for staging
-        ```shell script
-        travis encrypt-file integration/google/credentials-production.json integration/google/credentials-production.json.enc
-        ```
-    7. Add decription command to before_install: from result, it would be something like this
-        ```shell script
-        openssl aes-256-cbc -K $encrypted_<some_key>_key -iv $encrypted_<some_key>_iv -in integration/google/credentials-production.json.enc -out integration/google/credentials-production.json -d
-        ```
-        Make sure to add integration/google/credentials-production.json.enc to the git repository.
-        Make sure not to add integration/google/credentials-production.json to the git repository.
+        Make sure to add integration/google/credentials.json.enc to the git repository.
+        Make sure not to add integration/google/credentials.json to the git repository.
         Commit all changes to your .travis.yml.

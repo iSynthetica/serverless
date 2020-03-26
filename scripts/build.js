@@ -10,6 +10,13 @@ if (process.env.environment.endsWith("-dev")){
 var config = `
 module.exports = {
     env: '${process.env.environment}',
+    functions: [
+      'register',
+      'payment',
+      'membership',
+      'upsell',
+      'change-email'
+    ]
 }
 `;
 
