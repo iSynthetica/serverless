@@ -5,7 +5,11 @@ const {
 } = require('./handlers');
 
 const functions = [
-  'process'
+  'register',
+  'payment',
+  'membership',
+  'upsell',
+  'changeEmail',
 ];
 
 // Auto-Generator

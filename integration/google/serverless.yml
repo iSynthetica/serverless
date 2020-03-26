@@ -25,7 +25,23 @@ package:
     - package.json
 
 functions:
-  processAllFunction:
-    handler: process
+  registerFunction:
+    handler: register-${opt:stage}
+    events:
+      - http: path
+  paymentFunction:
+    handler: payment-${opt:stage}
+    events:
+      - http: path
+  membershipFunction:
+    handler: membership-${opt:stage}
+    events:
+      - http: path
+  upsellFunction:
+    handler: upsell-${opt:stage}
+    events:
+      - http: path
+  changeEmailFunction:
+    handler: changeEmail-${opt:stage}
     events:
       - http: path
