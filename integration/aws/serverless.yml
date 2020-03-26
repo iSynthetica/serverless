@@ -18,13 +18,61 @@ layers:
     description: Shared library layer
 
 functions:
-  processAllFunction:
-    handler: index.process
-    name: ${opt:stage}-easyfunnel-process
+  register:
+    handler: index.register
+    name: register-${opt:stage}
     description: Function to process steps from funnel
     events:
       - http:
-          path: process/{step}
+          path: register
+          method: post
+          cors: true
+    layers:
+      - {Ref: ControllersLambdaLayer}
+
+  payment:
+    handler: index.payment
+    name: payment-${opt:stage}
+    description: Function to process steps from funnel
+    events:
+      - http:
+          path: payment
+          method: post
+          cors: true
+    layers:
+      - {Ref: ControllersLambdaLayer}
+
+  membership:
+    handler: index.membership
+    name: membership-${opt:stage}
+    description: Function to process steps from funnel
+    events:
+      - http:
+          path: membership
+          method: post
+          cors: true
+    layers:
+      - {Ref: ControllersLambdaLayer}
+
+  upsell:
+    handler: index.upsell
+    name: upsell-${opt:stage}
+    description: Function to process steps from funnel
+    events:
+      - http:
+          path: upsell
+          method: post
+          cors: true
+    layers:
+      - {Ref: ControllersLambdaLayer}
+
+  changeEmail:
+    handler: index.change-email
+    name: change-email-${opt:stage}
+    description: Function to process steps from funnel
+    events:
+      - http:
+          path: change-email
           method: post
           cors: true
     layers:

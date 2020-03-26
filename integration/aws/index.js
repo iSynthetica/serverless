@@ -1,35 +1,38 @@
 'use strict';
+const config = require('./opt/nodejs/config');
 
-module.exports.process = async event => {
-    let result = {
-        "message": "Hello from AWS M1 API",
-        "request": event
-    }
+const functions = config.functions;
 
-    return {
-        statusCode: 200,
-        body: JSON.stringify(result)
+let exportObject = {};
+
+for(let functionName of functions){
+    exportObject[`${functionName}-${config.env}`] = handler(functionName)
+}
+
+module.exports = exportObject;
+
+function handler(functionName) {
+    return async event => {
+        let result = {
+            "message": "Hello from " + functionName,
+            "request": event
+        }
+
+        return {
+            statusCode: 200,
+            body: JSON.stringify(result)
+        };
     };
-    // console.log('test=======================================');
-    // let step = event.pathParameters.step;
-    // let payload = JSON.parse(event.body);
-    // console.log('test=======================================');
-    //
-    // const controller = require(`/opt/nodejs/${step}`);
-    // console.log('test=======================================');
-    // let result = await controller.process(payload);
-    // console.log('test=======================================');
-    //
-    // return {
-    //     statusCode: 200,
-    //     body: JSON.stringify(
-    //         {
-    //             message: 'Go Serverless v1.0! Your function executed successfully!',
-    //             step: step,
-    //             payload: payload,
-    //             result: result,
-    //             input: event
-    //         }, null, 2
-    //     )
-    // };
-};
+}
+
+// module.exports.process = async event => {
+//     let result = {
+//         "message": "Hello from AWS M1 API",
+//         "request": event
+//     }
+//
+//     return {
+//         statusCode: 200,
+//         body: JSON.stringify(result)
+//     };
+// };
