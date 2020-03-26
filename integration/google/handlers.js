@@ -1,8 +1,8 @@
-
 exports.handler = (functionName) => {
     return async (request, response) => {
-        console.log(request);
+        let controller = require(`./controllers/${functionName}`);
+        let result = await controller.process(request);
 
-        response.status(200).send('Hello from ' + functionName);
+        response.status(200).send(result);
     };
 }
