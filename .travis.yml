@@ -6,6 +6,8 @@ node_js:
 # We need to generate new keys for GCP
 before_install:
   - openssl aes-256-cbc -K $encrypted_eb58c3e7c70a_key -iv $encrypted_eb58c3e7c70a_iv -in integration/google/credentials.json.enc -out integration/google/credentials.json -d
+  - mkdir ~/.gcloud
+  - mv integration/google/credentials.json ~/.gcloud/credentials.json
 
 before_script:
   - npm install -g serverless
@@ -17,8 +19,6 @@ before_script:
   - cd controllers && npm install && cd ..
   - cd integration/azure && npm install && cd ../..
   - cd integration/google && npm install && cd ../..
-  - mkdir ~/.gcloud
-  - mv credentials.json ~/.gcloud/credentials.json
 
 jobs:
   include:
