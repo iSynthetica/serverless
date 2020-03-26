@@ -56,12 +56,12 @@ jobs:
         - rsync -r controllers/ integration/azure/controllers
         - rsync -r controllers/ integration/google/controllers
         - cd integration/aws
-        - serverless deploy --stage production -v
+        - serverless deploy --stage production --force -v
         - cd ../..
         - cd integration/azure
-        - serverless deploy --stage production -v
+        - serverless deploy --stage production --force -v
         - cd ../..
         - cd integration/google
         - mv credentials-staging.json ~/.gcloud/credentials-production.json
-        - serverless deploy --stage production -v
+        - serverless deploy --stage production --force -v
         - cd ../..
