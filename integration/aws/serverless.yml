@@ -3,6 +3,7 @@ service: mb-funnel-be
 provider:
   name: aws
   runtime: nodejs10.x
+  profile: m1-profile
 
 # you can add packaging information here
 package:
@@ -18,8 +19,56 @@ layers:
     description: Shared library layer
 
 functions:
+  auth:
+    handler: handlers/auth.handler
+    name: auth-${opt:stage}
+    description: Function to process steps from funnel
+    events:
+      - http:
+          path: auth
+          method: post
+          cors: true
+    layers:
+      - {Ref: ControllersLambdaLayer}
+
+  donate:
+    handler: handlers/donate.handler
+    name: donate-${opt:stage}
+    description: Function to process steps from funnel
+    events:
+      - http:
+          path: donate
+          method: post
+          cors: true
+    layers:
+      - {Ref: ControllersLambdaLayer}
+
+  getPlans:
+    handler: handlers/get_plans.handler
+    name: getPlans-${opt:stage}
+    description: Function to process steps from funnel
+    events:
+      - http:
+          path: get_plans
+          method: post
+          cors: true
+    layers:
+      - {Ref: ControllersLambdaLayer}
+
+  pay:
+    handler: handlers/pay.handler
+    name: pay-${opt:stage}
+    description: Function to process steps from funnel
+    events:
+      - http:
+          path: pay
+          method: post
+          cors: true
+    layers:
+      - {Ref: ControllersLambdaLayer}
+
   register:
-    handler: index.register
+    handler: handlers/register.handler
     name: register-${opt:stage}
     description: Function to process steps from funnel
     events:
@@ -30,49 +79,37 @@ functions:
     layers:
       - {Ref: ControllersLambdaLayer}
 
-  payment:
-    handler: index.payment
-    name: payment-${opt:stage}
+  selectPlan:
+    handler: handlers/select_plan.handler
+    name: selectPlan-${opt:stage}
     description: Function to process steps from funnel
     events:
       - http:
-          path: payment
+          path: select_plan
           method: post
           cors: true
     layers:
       - {Ref: ControllersLambdaLayer}
 
-  membership:
-    handler: index.membership
-    name: membership-${opt:stage}
+  updateEmail:
+    handler: handlers/update_email.handler
+    name: updateEmail-${opt:stage}
     description: Function to process steps from funnel
     events:
       - http:
-          path: membership
+          path: update_email
           method: post
           cors: true
     layers:
       - {Ref: ControllersLambdaLayer}
 
-  upsell:
-    handler: index.upsell
-    name: upsell-${opt:stage}
+  upgrade:
+    handler: handlers/upgrade.handler
+    name: upgrade-${opt:stage}
     description: Function to process steps from funnel
     events:
       - http:
-          path: upsell
-          method: post
-          cors: true
-    layers:
-      - {Ref: ControllersLambdaLayer}
-
-  changeEmail:
-    handler: index.change-email
-    name: change-email-${opt:stage}
-    description: Function to process steps from funnel
-    events:
-      - http:
-          path: change-email
+          path: upgrade
           method: post
           cors: true
     layers:

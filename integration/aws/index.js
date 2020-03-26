@@ -1,5 +1,5 @@
 'use strict';
-const config = require('./opt/nodejs/config');
+const config = require('/opt/nodejs/config');
 
 const functions = config.functions;
 
@@ -25,14 +25,86 @@ function handler(functionName) {
     };
 }
 
-// module.exports.process = async event => {
-//     let result = {
-//         "message": "Hello from AWS M1 API",
-//         "request": event
-//     }
-//
-//     return {
-//         statusCode: 200,
-//         body: JSON.stringify(result)
-//     };
-// };
+module.exports.plans = async event => {
+    let result = {
+        "message": "Hello from AWS M1 API",
+        "request": event
+    }
+
+    return {
+        statusCode: 200,
+        body: JSON.stringify(result)
+    };
+};
+
+module.exports.register = async event => {
+    let result = {
+        "message": "Hello from AWS M1 API",
+        "request": event
+    }
+
+    return {
+        statusCode: 200,
+        body: JSON.stringify(result)
+    };
+};
+
+module.exports.payment = async event => {
+    let result = {
+        "message": "Hello from AWS M1 API",
+        "request": event
+    }
+
+    return {
+        statusCode: 200,
+        body: JSON.stringify(result)
+    };
+};
+
+module.exports.upgrade = async event => {
+    let result = {
+        "message": "Hello from AWS M1 API",
+        "request": event
+    }
+
+    return {
+        statusCode: 200,
+        body: JSON.stringify(result)
+    };
+};
+
+module.exports.donate = async event => {
+    let result = {
+        "message": "Hello from AWS M1 API",
+        "request": event
+    }
+
+    return {
+        statusCode: 200,
+        body: JSON.stringify(result)
+    };
+};
+
+module.exports.membership = async event => {
+    let result = {
+        "message": "Hello from AWS M1 API",
+        "request": event
+    }
+
+    return {
+        statusCode: 200,
+        body: JSON.stringify(result)
+    };
+};
+
+module.exports.updateEmail = async event => {
+    let result = {
+        "message": "Hello from AWS M1 API",
+        "request": event
+    }
+
+    return {
+        statusCode: 200,
+        body: JSON.stringify(result)
+    };
+};
