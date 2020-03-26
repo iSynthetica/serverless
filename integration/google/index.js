@@ -1,10 +1,6 @@
 'use strict';
 const config = require('./controllers/config');
 
-const {
-  handler
-} = require('./handlers');
-
 const functions = config.functions;
 
 // Auto-Generator
@@ -15,3 +11,14 @@ for(let functionName of functions){
 }
 
 module.exports = exportObject;
+
+function handler(functionName) {
+  return async (request, response) => {
+    let payloads = request.body || {};
+
+    let controller = require(`./controllers/${functionName}`);
+    let result = await controller.process(payloads);
+
+    response.status(200).send(result);
+  };
+}

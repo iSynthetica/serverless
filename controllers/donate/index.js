@@ -1,6 +1,6 @@
 exports.process = async (payload) => {
 
-    let result = 'Hello from Membership';
+    let result = 'Hello from Donate';
 
     return await result;
 }

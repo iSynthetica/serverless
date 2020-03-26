@@ -11,11 +11,14 @@ var config = `
 module.exports = {
     env: '${process.env.environment}',
     functions: [
+      'get_plans',
       'register',
-      'payment',
-      'membership',
-      'upsell',
-      'change-email'
+      'auth',
+      'pay',
+      'select_plan',
+      'upgrade',
+      'donate',
+      'update_email'
     ]
 }
 `;
