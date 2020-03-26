@@ -1,9 +1,10 @@
-service: easyfunnel-backend
+service: mb-funnel-be
 
 provider:
   name: azure
   runtime: nodejs10.x
   location: East US
+  apim: true
 
 plugins:
   - serverless-azure-functions
@@ -16,8 +17,32 @@ package:
     - .git/**
 
 functions:
-  processAllFunction:
-     handler: index.process
+  register:
+     handler: index.register-${opt:stage}
+     events:
+       - http: true
+         x-azure-settings:
+           authLevel: anonymous
+  payment:
+     handler: index.payment-${opt:stage}
+     events:
+       - http: true
+         x-azure-settings:
+           authLevel: anonymous
+  membership:
+     handler: index.membership-${opt:stage}
+     events:
+       - http: true
+         x-azure-settings:
+           authLevel: anonymous
+  upsell:
+     handler: index.upsell-${opt:stage}
+     events:
+       - http: true
+         x-azure-settings:
+           authLevel: anonymous
+  changeEmail:
+     handler: index.change-email-${opt:stage}
      events:
        - http: true
          x-azure-settings:

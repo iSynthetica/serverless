@@ -1,4 +1,4 @@
-service: easyfunnel-backend
+service: mb-funnel-be
 
 provider:
   name: aws

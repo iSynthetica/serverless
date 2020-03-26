@@ -5,6 +5,9 @@ node_js:
 
 # We need to generate new keys for GCP
 before_install:
+  - export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID_MB_FBE}
+  - export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY_MB_FBE}
+  - export AWS_REGION=${AWS_DEFAULT_REGION_MB_FBE}
   - openssl aes-256-cbc -K $encrypted_eb58c3e7c70a_key -iv $encrypted_eb58c3e7c70a_iv -in integration/google/credentials.json.enc -out integration/google/credentials.json -d
   - mkdir ~/.gcloud
   - mv integration/google/credentials.json ~/.gcloud/credentials.json
@@ -12,9 +15,6 @@ before_install:
 before_script:
   - npm install -g serverless
   - serverless --version
-  - export AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID_MB_FBE}
-  - export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY_MB_FBE}
-  - export AWS_REGION=${AWS_DEFAULT_REGION_MB_FBE}
   - npm install
   - cd controllers && npm install && cd ..
   - cd integration/azure && npm install && cd ../..
@@ -23,38 +23,38 @@ before_script:
 jobs:
   include:
     - stage: deploy
-      name: Deploy Milkbox Funnels Backend to Staging
+      name: Deploy MB Funnels Backend to Staging
       if: type = push AND tag =~ ^staging-deploy-.*$
       env: environment=staging
       script:
         - npm run build
         - rsync -r controllers/ integration/aws/dependencies/nodejs
-        - rsync -r controllers/ integration/azure/controllers
-        - rsync -r controllers/ integration/google/controllers
         - cd integration/aws
         - serverless deploy --stage staging --force -v
         - cd ../..
+        - rsync -r controllers/ integration/azure/controllers
         - cd integration/azure
         - serverless deploy --stage staging --force -v
         - cd ../..
+        - rsync -r controllers/ integration/google/controllers
         - cd integration/google
         - serverless deploy --stage staging --force -v
         - cd ../..
     - stage: deploy
-      name: Deploy Milkbox Funnels Backend to Staging
+      name: Deploy MB Funnels Backend to Production
       if: type = push AND tag =~ ^deploy-.*$
       env: environment=production
       script:
         - npm run build
         - rsync -r controllers/ integration/aws/dependencies/nodejs
-        - rsync -r controllers/ integration/azure/controllers
-        - rsync -r controllers/ integration/google/controllers
         - cd integration/aws
         - serverless deploy --stage production --force -v
         - cd ../..
+        - rsync -r controllers/ integration/azure/controllers
         - cd integration/azure
         - serverless deploy --stage production --force -v
         - cd ../..
+        - rsync -r controllers/ integration/google/controllers
         - cd integration/google
         - serverless deploy --stage production --force -v
         - cd ../..
