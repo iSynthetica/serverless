@@ -24,9 +24,6 @@ before_script:
   - 'cd integration/azure && npm install && cd ../..'
   - 'cd integration/google && npm install && cd ../..'
   - 'mkdir ~/.gcloud'
-  - 'rsync -r controllers/ integration/aws/dependencies/nodejs'
-  - 'rsync -r controllers/ integration/azure/controllers'
-  - 'rsync -r controllers/ integration/google/controllers'
 
 jobs:
   include:
@@ -35,6 +32,9 @@ jobs:
       if: type = push AND tag =~ ^staging-deploy-.*$
       env: environment=staging
       script:
+        - rsync -r controllers/ integration/aws/dependencies/nodejs
+        - rsync -r controllers/ integration/azure/controllers
+        - rsync -r controllers/ integration/google/controllers
         - cd integration/aws
         - serverless deploy --stage staging -v
         - cd ../..
@@ -50,6 +50,9 @@ jobs:
       if: type = push AND tag =~ ^deploy-.*$
       env: environment=production
       script:
+        - rsync -r controllers/ integration/aws/dependencies/nodejs
+        - rsync -r controllers/ integration/azure/controllers
+        - rsync -r controllers/ integration/google/controllers
         - cd integration/aws
         - serverless deploy --stage production -v
         - cd ../..

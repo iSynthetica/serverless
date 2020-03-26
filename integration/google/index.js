@@ -1,4 +1,5 @@
 'use strict';
+const config = require('./controllers/config');
 
 const {
   handler
@@ -9,14 +10,14 @@ const functions = [
   'payment',
   'membership',
   'upsell',
-  'changeEmail',
+  'change-email',
 ];
 
 // Auto-Generator
 let exportObject = {};
 
 for(let functionName of functions){
-  exportObject[`${functionName}`] = handler(functionName)
+  exportObject[`${functionName}-${config.env}`] = handler(functionName)
 }
 
 module.exports = exportObject;

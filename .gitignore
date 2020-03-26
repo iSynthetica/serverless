@@ -30,3 +30,4 @@ integration/*/accessKeys.csv
 
 !integration/*/dependencies/nodejs/.gitkeep
 !integration/*/controllers/.gitkeep
+/controllers/config.js

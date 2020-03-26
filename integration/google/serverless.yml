@@ -42,6 +42,6 @@ functions:
     events:
       - http: path
   changeEmailFunction:
-    handler: changeEmail-${opt:stage}
+    handler: change-email-${opt:stage}
     events:
       - http: path
