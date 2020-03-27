@@ -17,33 +17,75 @@ package:
     - .git/**
 
 functions:
+  auth:
+     handler: index.auth-${opt:stage}
+     events:
+       - http: true
+         x-azure-settings:
+           authLevel: anonymous
+           methods:
+             - post
+           route: auth
+  donate:
+     handler: index.donate-${opt:stage}
+     events:
+       - http: true
+         x-azure-settings:
+           authLevel: anonymous
+           methods:
+             - post
+           route: donate
+  getPlans:
+     handler: index.get_plans-${opt:stage}
+     events:
+       - http: true
+         x-azure-settings:
+           authLevel: anonymous
+           methods:
+             - post
+           route: get_plans
+  pay:
+     handler: index.pay-${opt:stage}
+     events:
+       - http: true
+         x-azure-settings:
+           authLevel: anonymous
+           methods:
+             - post
+           route: pay
   register:
      handler: index.register-${opt:stage}
      events:
        - http: true
          x-azure-settings:
            authLevel: anonymous
-  payment:
-     handler: index.payment-${opt:stage}
+           methods:
+             - post
+           route: register
+  selectPlan:
+     handler: index.select_plan-${opt:stage}
      events:
        - http: true
          x-azure-settings:
            authLevel: anonymous
-  membership:
-     handler: index.membership-${opt:stage}
+           methods:
+             - post
+           route: select_plan
+  updateEmail:
+     handler: index.update_email-${opt:stage}
      events:
        - http: true
          x-azure-settings:
            authLevel: anonymous
-  upsell:
-     handler: index.upsell-${opt:stage}
+           methods:
+             - post
+           route: update_email
+  upgrade:
+     handler: index.upgrade-${opt:stage}
      events:
        - http: true
          x-azure-settings:
            authLevel: anonymous
-  changeEmail:
-     handler: index.change-email-${opt:stage}
-     events:
-       - http: true
-         x-azure-settings:
-           authLevel: anonymous
+           methods:
+             - post
+           route: upgrade
