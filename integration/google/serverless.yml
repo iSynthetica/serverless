@@ -25,23 +25,35 @@ package:
     - package.json
 
 functions:
+  auth:
+    handler: auth-${opt:stage}
+    events:
+      - http: path
+  donate:
+    handler: donate-${opt:stage}
+    events:
+      - http: path
+  getPlans:
+    handler: get_plans-${opt:stage}
+    events:
+      - http: path
+  pay:
+    handler: pay-${opt:stage}
+    events:
+      - http: path
   register:
     handler: register-${opt:stage}
     events:
       - http: path
-  payment:
-    handler: payment-${opt:stage}
+  selectPlan:
+    handler: select_plan-${opt:stage}
     events:
       - http: path
-  membership:
-    handler: membership-${opt:stage}
+  updateEmail:
+    handler: update_email-${opt:stage}
     events:
       - http: path
-  upsell:
-    handler: upsell-${opt:stage}
-    events:
-      - http: path
-  changeEmail:
-    handler: change-email-${opt:stage}
+  upgrade:
+    handler: upgrade-${opt:stage}
     events:
       - http: path

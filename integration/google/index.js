@@ -19,6 +19,8 @@ function handler(functionName) {
     let controller = require(`./controllers/${functionName}`);
     let result = await controller.process(payloads);
 
-    response.status(200).send(result);
+    response.type('application/json');
+
+    response.status(200).send(JSON.stringify(result));
   };
 }
